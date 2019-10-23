@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/horizontal_padding"
     android:paddingLeft="@dimen/horizontal_padding"
-    android:paddingRight="@dimen/horizontal_padding"
     android:paddingTop="@dimen/vertical_padding"
+    android:paddingRight="@dimen/horizontal_padding"
+    android:paddingBottom="@dimen/horizontal_padding"
     tools:context="tech.dodd.tapattack.MainActivity">
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="28dp"
-        android:text="Name" />
+        android:text="@string/name_text" />
 
 
     <TextView
@@ -26,14 +26,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="28dp"
-        android:text="Score: 0" />
+        android:text="@string/score_zero" />
 
     <Button
         android:id="@+id/main_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Start" />
+        android:text="@string/start_text" />
 
     <TextView
         android:id="@+id/time_view"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:text="Time remaining: 0 seconds" />
+        android:text="@string/time_zero" />
 
     <Button
         android:id="@+id/achievements_button"
@@ -50,7 +50,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:onClick="onShowAchievementsRequested"
-        android:text="Achievements" />
+        android:text="@string/achievements" />
 
     <Button
         android:id="@+id/leaderboard_button"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="onShowLeaderboardsRequested"
-        android:text="Leaderboard" />
+        android:text="@string/leaderboard" />
 
     <LinearLayout
         android:id="@+id/sign_in_bar"
@@ -78,8 +78,8 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="@string/sign_in_why"
             android:textColor="#808080" />
@@ -121,6 +121,5 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
-
 
 </LinearLayout>
