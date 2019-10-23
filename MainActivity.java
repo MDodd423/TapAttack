@@ -3,8 +3,8 @@ package tech.dodd.tapattack;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     // The first click
                     playing = true;
                     clickScore = 0;
-                    mainButton.setText("Keep Clicking");
+                    mainButton.setText(R.string.keep_clicking);
 
                     // Initialize CountDownTimer to 30 seconds
                     new CountDownTimer(30000, 1000) {
@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
                             //Resets the game
                             playing = false;
-                            mainButton.setText("Start");
-                            timeView.setText("Game over");
+                            mainButton.setText(R.string.start_text);
+                            timeView.setText(R.string.game_over_text);
 
                             //Updates the number of times the game is played.
                             mOutbox.mNumPlays++;
@@ -126,7 +126,11 @@ public class MainActivity extends AppCompatActivity {
                     checkForAchievements(clickScore);
                 }
             }
-        });
+        });//END SIMPLE GAME
+    }
+
+    private void startSignInIntent() {
+        startActivityForResult(mGoogleSignInClient.getSignInIntent(), RC_SIGN_IN);
     }
 
     private boolean isSignedIn() {
@@ -151,10 +155,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void startSignInIntent() {
-        startActivityForResult(mGoogleSignInClient.getSignInIntent(), RC_SIGN_IN);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -163,26 +163,6 @@ public class MainActivity extends AppCompatActivity {
         // Since the state of the signed in user can change when the activity is not active
         // it is recommended to try and sign in silently from when the app resumes.
         signInSilently();
-    }
-
-    private void signOut() {
-        Log.d(TAG, "signOut()");
-
-        if (!isSignedIn()) {
-            Log.w(TAG, "signOut() called, but was not signed in!");
-            return;
-        }
-
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        boolean successful = task.isSuccessful();
-                        Log.d(TAG, "signOut(): " + (successful ? "success" : "failed"));
-
-                        onDisconnected();
-                    }
-                });
     }
 
     public void onShowAchievementsRequested(View v) {
@@ -297,6 +277,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Update leaderboards with the user's score.
+    private void updateLeaderboards(int score) {
+        if (mOutbox.mClickScore < score) {
+            mOutbox.mClickScore = score;
+            pushAccomplishments();
+        }
+    }
+
     private void pushAccomplishments() {
         if (!isSignedIn()) {
             // can't push to the cloud, try again later
@@ -330,14 +318,6 @@ public class MainActivity extends AppCompatActivity {
             mLeaderboardsClient.submitScore(getString(R.string.leaderboard_most_taps_attacked),
                     mOutbox.mClickScore);
             mOutbox.mClickScore = -1;
-        }
-    }
-
-    //Update leaderboards with the user's score.
-    private void updateLeaderboards(int score) {
-        if (mOutbox.mClickScore < score) {
-            mOutbox.mClickScore = score;
-            pushAccomplishments();
         }
     }
 
@@ -377,12 +357,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void onConnected(GoogleSignInAccount googleSignInAccount) {
         Log.d(TAG, "onConnected(): connected to Google APIs");
-        
-        //Added this to show Google Play Games Achievement Notifications - If statement because it can be null if user signsout
-        if (isSignedIn()) {
-            GamesClient gamesClient = Games.getGamesClient(MainActivity.this, GoogleSignIn.getLastSignedInAccount(this));
-            gamesClient.setViewForPopups(findViewById(R.id.gps_popup));
-        }
 
         mAchievementsClient = Games.getAchievementsClient(this, googleSignInAccount);
         mLeaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
@@ -415,6 +389,40 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.your_progress_will_be_uploaded),
                     Toast.LENGTH_LONG).show();
         }
+
+        //Added this to show Google Play Games Achievement Notifications - If statement because it can be null if user signsout
+        if (isSignedIn()) {
+            GamesClient gamesClient = Games.getGamesClient(MainActivity.this, GoogleSignIn.getLastSignedInAccount(this));
+            gamesClient.setViewForPopups(findViewById(R.id.gps_popup));
+        }
+    }
+
+    public void onSignInButtonClicked(View v) {
+        startSignInIntent();
+    }
+
+    public void onSignOutButtonClicked(View v) {
+        signOut();
+    }
+
+    private void signOut() {
+        Log.d(TAG, "signOut()");
+
+        if (!isSignedIn()) {
+            Log.w(TAG, "signOut() called, but was not signed in!");
+            return;
+        }
+
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        boolean successful = task.isSuccessful();
+                        Log.d(TAG, "signOut(): " + (successful ? "success" : "failed"));
+
+                        onDisconnected();
+                    }
+                });
     }
 
     private void onDisconnected() {
@@ -428,16 +436,6 @@ public class MainActivity extends AppCompatActivity {
         layoutSignout.setVisibility(View.GONE);
         layoutSignin.setVisibility(View.VISIBLE);
         nameView.setText(getString(R.string.signed_out_greeting));
-    }
-
-
-    public void onSignInButtonClicked(View v) {
-        startSignInIntent();
-    }
-
-
-    public void onSignOutButtonClicked(View v) {
-        signOut();
     }
 
     private class AccomplishmentsOutbox {
