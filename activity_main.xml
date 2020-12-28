@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:text="@string/time_zero" />
+        android:text="@string/timer_text" />
 
     <Button
         android:id="@+id/achievements_button"
@@ -79,7 +79,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:text="@string/sign_in_why"
             android:textColor="#808080" />
@@ -100,7 +99,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:text="@string/you_are_signed_in"
             android:textColor="#808080" />
@@ -118,8 +116,6 @@
         android:id="@+id/gps_popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
 </LinearLayout>
