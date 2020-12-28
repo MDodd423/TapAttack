@@ -2,6 +2,7 @@ package tech.dodd.tapattack;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.CountDownTimer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "TapAttack"; // tag for debug logging
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView nameView; //Used to display the users Google Play Games username
     private TextView scoreView; //Used to display the game score
     private TextView timeView; //Used to display the game time limit
+    private Resources res;
     private LinearLayout layoutSignin, layoutSignout; //We will toggle a Signin and Signout layout
 
     private int clickScore = 0; //The game score
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         SignInButton buttonSignIn = findViewById(R.id.sign_in_button); //Google Signin Button
         layoutSignin = findViewById(R.id.sign_in_bar); //layout for displaying Signin Elements
         layoutSignout = findViewById(R.id.sign_out_bar); //layout for displaying Signout Elements
+        res = getResources();
 
         //Used when the Google Signin button is pressed.
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onTick(long millisUntilFinished) {
                             //As each second ticks down during the game the textView is updated.
-                            timeView.setText("Time remaining: " + millisUntilFinished / 1000);
+                            String timeviewtext = res.getString(R.string.timeviewstring, (millisUntilFinished / 1000) + 1);
+                            timeView.setText(timeviewtext);
                         }
 
                         @Override
@@ -121,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     // Subsequent clicks
                     clickScore++;
-                    scoreView.setText("Score: " + clickScore + " points");
+                    String clickscoretext = res.getString(R.string.clickscorestring, clickScore);
+                    scoreView.setText(clickscoretext);
                     // check for achievements
                     checkForAchievements(clickScore);
                 }
@@ -224,21 +231,6 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    // Checks if n is prime. We don't consider 0 and 1 to be prime.
-    // This is not an implementation we are mathematically proud of, but it gets the job done.
-    private boolean isPrime(int n) {
-        int i;
-        if (n == 0 || n == 1) {
-            return false;
-        }
-        for (i = 2; i <= n / 2; i++) {
-            if (n % i == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     /*
      * Check for achievements and unlock the appropriate ones.
      *
@@ -246,9 +238,14 @@ public class MainActivity extends AppCompatActivity {
      */
     private void checkForAchievements(int score) {
         // Check if each condition is met; if so, unlock the corresponding achievement.
-        if (isPrime(score)) {
-            mOutbox.mPrimeAchievement = true;
-            achievementToast(getString(R.string.achievement_prime_toast_text));
+        if (score == 200) {
+            mOutbox.mTapnadoAchievement = true;
+            achievementToast(getString(R.string.achievement_tapnado_toast_text));
+            pushAccomplishments();
+        }
+        if (score == 150) {
+            mOutbox.mHailaciousAchievement = true;
+            achievementToast(getString(R.string.achievement_hailacious_toast_text));
             pushAccomplishments();
         }
         if (score == 100) {
@@ -256,14 +253,9 @@ public class MainActivity extends AppCompatActivity {
             achievementToast(getString(R.string.achievement_lightning_toast_text));
             pushAccomplishments();
         }
-        if (score == 10) {
-            mOutbox.mLazyAchievement = true;
-            achievementToast(getString(R.string.achievement_lazy_toast_text));
-            pushAccomplishments();
-        }
-        if (score == 37) {
-            mOutbox.mLeetAchievement = true;
-            achievementToast(getString(R.string.achievement_leet_toast_text));
+        if (score == 50) {
+            mOutbox.mBreezyAchievement = true;
+            achievementToast(getString(R.string.achievement_breezy_toast_text));
             pushAccomplishments();
         }
     }
@@ -290,21 +282,21 @@ public class MainActivity extends AppCompatActivity {
             // can't push to the cloud, try again later
             return;
         }
-        if (mOutbox.mPrimeAchievement) {
-            mAchievementsClient.unlock(getString(R.string.achievement_prime_clicks));
-            mOutbox.mPrimeAchievement = false;
+        if (mOutbox.mTapnadoAchievement) {
+            mAchievementsClient.unlock(getString(R.string.achievement_tapnado));
+            mOutbox.mTapnadoAchievement = false;
+        }
+        if (mOutbox.mHailaciousAchievement) {
+            mAchievementsClient.unlock(getString(R.string.achievement_hailacious));
+            mOutbox.mHailaciousAchievement = false;
         }
         if (mOutbox.mLightningAchievement) {
-            mAchievementsClient.unlock(getString(R.string.achievement_lightning_fast));
+            mAchievementsClient.unlock(getString(R.string.achievement_lightning));
             mOutbox.mLightningAchievement = false;
         }
-        if (mOutbox.mLazyAchievement) {
-            mAchievementsClient.unlock(getString(R.string.achievement_lazy_clicks));
-            mOutbox.mLazyAchievement = false;
-        }
-        if (mOutbox.mLeetAchievement) {
-            mAchievementsClient.unlock(getString(R.string.achievement_leet_clicks));
-            mOutbox.mLeetAchievement = false;
+        if (mOutbox.mBreezyAchievement) {
+            mAchievementsClient.unlock(getString(R.string.achievement_breezy));
+            mOutbox.mBreezyAchievement = false;
         }
         if (mOutbox.mNumPlays > 0) {
             mAchievementsClient.increment(getString(R.string.achievement_play_a_whole_lot),
@@ -339,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
 
                 onDisconnected();
 
-                if(message.startsWith("13")){
+                if(message.startsWith("12501")){
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle(R.string.alert_nologin_title)
                             .setMessage(R.string.alert_nologin_message)
@@ -372,13 +364,14 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Player> task) {
                 String displayName;
                 if (task.isSuccessful()) {
-                    displayName = task.getResult().getDisplayName();
+                    displayName = Objects.requireNonNull(task.getResult()).getDisplayName();
                 } else {
                     Exception e = task.getException();
                     handleException(e, getString(R.string.players_exception));
                     displayName = "???";
                 }
-                nameView.setText("Hello, " + displayName);
+                String namestringtext = res.getString(R.string.namestring, displayName);
+                nameView.setText(namestringtext);
             }
         });
 
@@ -392,13 +385,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Added this to show Google Play Games Achievement Notifications - If statement because it can be null if user signsout
         if (isSignedIn()) {
-            GamesClient gamesClient = Games.getGamesClient(MainActivity.this, GoogleSignIn.getLastSignedInAccount(this));
+            GamesClient gamesClient = Games.getGamesClient(MainActivity.this, Objects.requireNonNull(GoogleSignIn.getLastSignedInAccount(this)));
             gamesClient.setViewForPopups(findViewById(R.id.gps_popup));
         }
-    }
-
-    public void onSignInButtonClicked(View v) {
-        startSignInIntent();
     }
 
     public void onSignOutButtonClicked(View v) {
@@ -438,18 +427,17 @@ public class MainActivity extends AppCompatActivity {
         nameView.setText(getString(R.string.signed_out_greeting));
     }
 
-    private class AccomplishmentsOutbox {
-        boolean mPrimeAchievement = false;
-        boolean mLazyAchievement = false;
-        boolean mLeetAchievement = false;
+    private static class AccomplishmentsOutbox {
+        boolean mTapnadoAchievement = false;
+        boolean mHailaciousAchievement = false;
         boolean mLightningAchievement = false;
+        boolean mBreezyAchievement = false;
         int mNumPlays = 0;
         int mClickScore = -1;
 
         boolean isEmpty() {
-            return !mPrimeAchievement && !mLazyAchievement && !mLeetAchievement &&
+            return !mHailaciousAchievement && !mBreezyAchievement && !mTapnadoAchievement &&
                     !mLightningAchievement && mNumPlays == 0 && mClickScore < 0;
         }
-
     }
 }
