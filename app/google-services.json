@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "817319663124",
+    "firebase_url": "https://tapattack-b2b37.firebaseio.com",
+    "project_id": "tapattack-b2b37",
+    "storage_bucket": "tapattack-b2b37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817319663124:android:4369335294f65ea7",
+        "android_client_info": {
+          "package_name": "tech.dodd.tapattack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817319663124-2nc1ppvleqntd493252cq5camm7f3966.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.dodd.tapattack",
+            "certificate_hash": "c946e2465f753dcb972307c154dd90816d9a72eb"
+          }
+        },
+        {
+          "client_id": "817319663124-m652qebp6cgr6tb17om805ngufbct9um.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO5yJeKPJkkqRX15NrypK9W787p4ScCxw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817319663124-m652qebp6cgr6tb17om805ngufbct9um.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

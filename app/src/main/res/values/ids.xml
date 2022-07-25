@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/ids.xml in your project.
+-->
+<resources>
+    <!-- app_id -->
+    <string name="app_id" translatable="false">817319663124</string>
+    <!-- package_name -->
+    <string name="package_name" translatable="false">tech.dodd.tapattack</string>
+    <!-- achievement Tapnado -->
+    <string name="achievement_tapnado" translatable="false">CgkIlKyx4OQXEAIQBA</string>
+    <!-- achievement Hailacious -->
+    <string name="achievement_hailacious" translatable="false">CgkIlKyx4OQXEAIQBg</string>
+    <!-- achievement Lightning -->
+    <string name="achievement_lightning" translatable="false">CgkIlKyx4OQXEAIQAg</string>
+    <!-- achievement Breezy -->
+    <string name="achievement_breezy" translatable="false">CgkIlKyx4OQXEAIQBQ</string>
+    <!-- achievement Play A Lot -->
+    <string name="achievement_play_a_lot" translatable="false">CgkIlKyx4OQXEAIQBw</string>
+    <!-- achievement Play A Whole Lot -->
+    <string name="achievement_play_a_whole_lot" translatable="false">CgkIlKyx4OQXEAIQCA</string>
+    <!-- leaderboard Most Taps Attacked -->
+    <string name="leaderboard_most_taps_attacked" translatable="false">CgkIlKyx4OQXEAIQAQ</string>
+</resources>
