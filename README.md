@@ -11,3 +11,5 @@ TapAttack is a very simple, single Activity and single Layout, Android applicati
 This example is now available in both Java and Kotlin. Edit the Android Manifest and layout file to switch between versions.
 
 If I can be of any help: [Michael Dodd](https://twitter.com/MDodd423)
+
+![Screenshot](TapAttackScreenshot.png?raw=true "TPScreenshot")
