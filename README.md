@@ -12,4 +12,4 @@ This example is now available in both Java and Kotlin. Edit the Android Manifest
 
 If I can be of any help: [Michael Dodd](https://twitter.com/MDodd423)
 
-![Screenshot](TapAttackScreenshot.png?raw=true "TPScreenshot")
+<img src="TapAttackScreenshot.png" width="25%" height="25%">
