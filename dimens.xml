@@ -1,0 +1,10 @@
+<resources>
+    <!-- Screen margins, paddings, heights, and widths = dp -->
+    <dimen name="zero_dp">0dp</dimen>
+    <dimen name="eight_dp">8dp</dimen>
+    <dimen name="sixteen_dp">16dp</dimen>
+    <dimen name="thirtytwo_dp">32dp</dimen>
+    <dimen name="onetwoeight_dp">128dp</dimen>
+    <!-- Screen textsize = sp -->
+    <dimen name="twelve_sp">12sp</dimen>
+</resources>
