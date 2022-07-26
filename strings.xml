@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Tap Attack</string>
+    <string name="menu_daynight">DayNight</string>
     <string name="connectedtext">Currently Connected to GPGS</string>
     <string name="notconnectedtext">Currently Not Connected to GPGS</string>
     <string name="signed_out_greeting">Hello, anonymous user (not signed in)!</string>
