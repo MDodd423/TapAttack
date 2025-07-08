@@ -1,126 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable
-            name="handlers"
-            type="tech.dodd.tapattack.JavaActivity" />
-    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/eight_dp"
+    android:paddingVertical="@dimen/sixteen_dp"
+    tools:context="tech.dodd.tapattack.MainKotlinActivity">
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/thirtytwo_dp"
+        android:text="@string/name_text" />
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/thirtytwo_dp"
+        android:text="@string/score_zero" />
+
+    <Button
+        android:id="@+id/mainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/start_text" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/thirtytwo_dp"
+        android:text="@string/timer_text" />
+
+    <Button
+        android:id="@+id/achievementsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/thirtytwo_dp"
+        android:text="@string/achievements" />
+
+    <Button
+        android:id="@+id/leaderboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/leaderboard" />
+
     <LinearLayout
+        android:id="@+id/signinLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/eight_dp"
-        android:paddingVertical="@dimen/sixteen_dp"
-        tools:context="tech.dodd.tapattack.JavaActivity">
+        android:layout_height="@dimen/onetwoeight_dp"
+        android:layout_marginTop="@dimen/thirtytwo_dp"
+        android:background="#f0f0f0"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/eight_dp">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/signinButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/thirtytwo_dp"
-            android:text="@string/name_text" />
-
-        <TextView
-            android:id="@+id/scoreTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/thirtytwo_dp"
-            android:text="@string/score_zero" />
-
-        <Button
-            android:id="@+id/mainButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="@{handlers::doClick}"
-            android:text="@string/start_text" />
-
-        <TextView
-            android:id="@+id/timeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/thirtytwo_dp"
-            android:text="@string/timer_text" />
-
-        <Button
-            android:id="@+id/achievementsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/thirtytwo_dp"
-            android:onClick="@{handlers::doClick}"
-            android:text="@string/achievements" />
-
-        <Button
-            android:id="@+id/leaderboardButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="@{handlers::doClick}"
-            android:text="@string/leaderboard" />
-
-        <LinearLayout
-            android:id="@+id/signinLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/onetwoeight_dp"
-            android:layout_marginTop="@dimen/thirtytwo_dp"
-            android:background="#f0f0f0"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/eight_dp">
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/signinButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/eight_dp"
-                android:layout_weight="1"
-                android:text="@string/sign_in_why"
-                android:textColor="#546E7A" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/signoutLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/onetwoeight_dp"
-            android:layout_marginTop="@dimen/thirtytwo_dp"
-            android:background="#f0f0f0"
-            android:gravity="center|end"
-            android:orientation="horizontal"
-            android:padding="@dimen/eight_dp"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/eight_dp"
-                android:layout_weight="1"
-                android:text="@string/you_are_signed_in"
-                android:textColor="#808080" />
-
-            <Button
-                android:id="@+id/signoutButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{handlers::doClick}"
-                android:text="@string/sign_out"
-                android:textSize="@dimen/twelve_sp" />
-        </LinearLayout>
-
-        <FrameLayout
-            android:id="@+id/gps_popup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/sixteen_dp" />
+            android:layout_marginStart="@dimen/eight_dp"
+            android:layout_weight="1"
+            android:text="@string/sign_in_why"
+            android:textColor="#546E7A" />
 
     </LinearLayout>
-</layout>
+</LinearLayout>

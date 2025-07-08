@@ -1,46 +1,48 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
+    id 'com.google.gms.google-services'
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion "33.0.0"
+    namespace = 'tech.dodd.tapattack'
+    compileSdk = 36
+    buildToolsVersion = '36.0.0'
 
     defaultConfig {
-        applicationId "tech.dodd.tapattack"
-        minSdkVersion 19
-        targetSdkVersion 32
-        versionCode 1
-        versionName "1.0"
+        applicationId = 'tech.dodd.tapattack'
+        minSdkVersion 21
+        targetSdkVersion 36
+        versionCode = 1
+        versionName = '1.0'
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources = true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     buildFeatures {
-        dataBinding true
+        viewBinding = true
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = '11'
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0-alpha05'
-    implementation 'com.google.android.material:material:1.7.0-alpha03'
-    implementation "com.google.android.gms:play-services-games:22.0.1"
-    implementation "com.google.android.gms:play-services-auth:20.2.0"
+    implementation 'androidx.core:core-ktx:1.16.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.google.android.gms:play-services-games-v2:21.0.0'
 }
