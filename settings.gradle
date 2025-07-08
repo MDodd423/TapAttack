@@ -1,1 +1,23 @@
-include ':app'
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal() // For resolving plugins by their ID
+    }
+}
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
+}
+
+dependencyResolutionManagement {
+    // Enforces that all repositories are declared here and not in project/module build.gradle files
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // Example: maven { url 'https://www.jitpack.io' }
+    }
+}
+
+rootProject.name = "TapAttack" // Replace with your actual project name
+include ':app' // Include your application module

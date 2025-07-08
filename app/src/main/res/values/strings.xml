@@ -1,34 +1,24 @@
 <resources>
     <string name="app_name">Tap Attack</string>
     <string name="menu_daynight">DayNight</string>
-    <string name="connectedtext">Currently Connected to GPGS</string>
     <string name="notconnectedtext">Currently Not Connected to GPGS</string>
-    <string name="signed_out_greeting">Hello, anonymous user (not signed in)!</string>
     <string name="achievements_exception">There was an issue communicating with achievements.</string>
     <string name="leaderboards_exception">There was an issue communicating with leaderboards.</string>
-    <string name="players_exception">There was an issue communicating with players.</string>
     <string name="status_exception_error">%1$s (status %2$d). %3$s.</string>
     <string name="achievement_tapnado_toast_text">Tapnado (200 Taps)!</string>
     <string name="achievement_hailacious_toast_text">Hailacious (150 Taps)!</string>
     <string name="achievement_lightning_toast_text">Lightning (100 Taps)!</string>
     <string name="achievement_breezy_toast_text">Breezy (50 Taps)!</string>
-    <string name="your_progress_will_be_uploaded">Your existing achievements and score will be uploaded shortly.</string>
     <string name="sign_in_why">Sign in with Google to share your scores and achievements with your friends.</string>
     <string name="you_are_signed_in">You are signed in with Google.</string>
-    <string name="sign_out">Sign out</string>
-    <string name="signin_other_error">There was an issue with sign in.  Please try again later.</string>
-    <string name="alert_nologin_title">No Account Selected.</string>
-    <string name="alert_nologin_message">Tapattack will continue without the user being signed in. Try again if you like.</string>
     <string name="keep_clicking">Keep Tapping</string>
     <string name="start_text">Start</string>
     <string name="game_over_text">Game Over</string>
     <string name="name_text">Name</string>
     <string name="score_zero">Score: 0</string>
     <string name="timer_text">Press Start and Tap for 30 Seconds</string>
-    <string name="achievement">Achievement</string>
     <string name="achievements">Achievements</string>
     <string name="leaderboard">Leaderboard</string>
-    <string name="namestring">Hello, %1$s</string>
     <string name="clickscorestring">Score: %1$d points</string>
     <string name="timeviewstring">Time remaining: %1$d</string>
 </resources>
