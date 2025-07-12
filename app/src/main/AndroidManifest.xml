@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TapAttack"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        tools:targetApi="s">
+        tools:targetApi="baklava">
 
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"

@@ -2,18 +2,14 @@ package tech.dodd.tapattack
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
-import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.games.AchievementsClient
 import com.google.android.gms.games.AuthenticationResult
@@ -21,24 +17,17 @@ import com.google.android.gms.games.LeaderboardsClient
 import com.google.android.gms.games.PlayGames
 import com.google.android.gms.games.Player
 import com.google.android.gms.tasks.Task
-import com.google.android.material.switchmaterial.SwitchMaterial
 import tech.dodd.tapattack.databinding.ActivityMainBinding
 
 class MainKotlinActivity : AppCompatActivity() {
-    companion object {
-        private const val TAG = "TapAttack" // TAG for debug logging
-    }
-
     private lateinit var binding: ActivityMainBinding
     private var clickScore = 0 // The game score
     private var playing = false // Whether the game is being played or not
-    private var day1night2 = 1
     private var isAuthenticated = false
     private var numPlays = 0 // Number of times the game is played
     private lateinit var mAchievementsClient: AchievementsClient // Client Achievement Variable
     private lateinit var mLeaderboardsClient: LeaderboardsClient // Client Leaderboard Variable
     private var signInActivityResultLauncher: ActivityResultLauncher<Intent>? = null
-    private lateinit var dayNightSwitch: SwitchMaterial
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,25 +71,6 @@ class MainKotlinActivity : AppCompatActivity() {
             }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-
-        //Practice Day/Night Themes
-        val item = menu.findItem(R.id.daynightSwitch)
-        item.actionView?.let { dayNightSwitch = it.findViewById(R.id.daynightSwitch) }
-        if (day1night2 == 2) {
-            dayNightSwitch.isChecked = true
-        }
-        dayNightSwitch.setOnClickListener {
-            if (day1night2 == 1) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else if (day1night2 == 2) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-        }
-        return super.onCreateOptionsMenu(menu)
-    }
-
     private fun leaderboard() {
         //If the Leaderboards button is pressed and the user is signed in show Leaderboards else Toast
         if (isAuthenticated) {
@@ -120,6 +90,7 @@ class MainKotlinActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.notconnectedtext), Toast.LENGTH_LONG).show()
         }
     }
+
     private fun achievements() {
         if (isAuthenticated) {
             mAchievementsClient.achievementsIntent
@@ -173,15 +144,6 @@ class MainKotlinActivity : AppCompatActivity() {
             val clickScoreText = resources.getString(R.string.clickscorestring, clickScore)
             binding.scoreTextView.text = clickScoreText
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-            Configuration.UI_MODE_NIGHT_YES -> day1night2 = 2
-            Configuration.UI_MODE_NIGHT_NO -> day1night2 = 1
-        }
-        Log.d(TAG, "onResume()")
     }
 
     private fun handleException(e: Exception, details: String) {

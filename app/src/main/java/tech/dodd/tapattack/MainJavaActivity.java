@@ -2,20 +2,14 @@ package tech.dodd.tapattack;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.games.AchievementsClient;
@@ -23,24 +17,18 @@ import com.google.android.gms.games.AuthenticationResult;
 import com.google.android.gms.games.GamesSignInClient;
 import com.google.android.gms.games.LeaderboardsClient;
 import com.google.android.gms.games.PlayGames;
-import com.google.android.material.switchmaterial.SwitchMaterial;
-
-import java.util.Objects;
 
 import tech.dodd.tapattack.databinding.ActivityMainBinding;
 
 public class MainJavaActivity extends AppCompatActivity {
-    private static final String TAG = "TapAttack"; // tag for debug logging
     private int clickScore = 0; // The game score
     private int numPlays = 0; // Number of times the game is played
     private boolean playing = false; // Whether the game is being played or not
     private Boolean isAuthenticated = false;
-    private int day1night2 = 1;
     public static AchievementsClient mAchievementsClient; // Client Achievement Variable
     public static LeaderboardsClient mLeaderboardsClient; // Client Leaderboard Variable
     ActivityMainBinding activityMainBinding; // MainJavaActivity dataBinding
     ActivityResultLauncher<Intent> signInActivityResultLauncher;
-    SwitchMaterial dayNightSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,29 +65,6 @@ public class MainJavaActivity extends AppCompatActivity {
                 activityMainBinding.signinLayout.setVisibility(View.GONE);
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        //Practice Day/Night Themes
-        MenuItem item = menu.findItem(R.id.daynightSwitch);
-        dayNightSwitch = Objects.requireNonNull(item.getActionView()).findViewById(R.id.daynightSwitch);
-
-        if (day1night2 == 2) {
-            dayNightSwitch.setChecked(true);
-        }
-
-        dayNightSwitch.setOnClickListener(view -> {
-            if (day1night2 == 1) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else if (day1night2 == 2) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
     }
 
     public void Achievements(){
@@ -158,22 +123,6 @@ public class MainJavaActivity extends AppCompatActivity {
             String clickScoreText = getResources().getString(R.string.clickscorestring, clickScore);
             activityMainBinding.scoreTextView.setText(clickScoreText);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        switch (nightModeFlags) {
-            case Configuration.UI_MODE_NIGHT_YES:
-                day1night2 = 2;
-                break;
-            case Configuration.UI_MODE_NIGHT_NO:
-                day1night2 = 1;
-                break;
-        }
-        Log.d(TAG, "onResume()");
     }
 
     // Check for achievements and unlock the appropriate ones

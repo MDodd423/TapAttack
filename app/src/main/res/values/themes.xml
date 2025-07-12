@@ -1,6 +1,6 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.TapAttack" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.TapAttack" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/indigo_500</item>
         <item name="colorPrimaryVariant">@color/indigo_700</item>
@@ -15,8 +15,6 @@
         <item name="colorControlActivated">@color/indigo_500</item>
         <!-- ControlDeactivated color. -->
         <!--<item name="colorSwitchThumbNormal">@color/gray_200</item> -->
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/thirtytwo_dp"
+        android:layout_marginVertical="@dimen/thirtytwo_dp"
         android:text="@string/name_text" />
 
     <TextView
